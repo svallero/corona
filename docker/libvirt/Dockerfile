@@ -1,4 +1,4 @@
-FROM fasrc/corona-base:4.12
+FROM svallero/corona-base:4.12
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="This is a libvirt image for DockerNebula"
@@ -12,5 +12,8 @@ RUN yum -y install \
 
 COPY supervisord/libvirtd.conf /etc/supervisor.d/libvirtd.conf
 COPY start.sh /root/start.sh
+COPY libvirt.conf /etc/libvirt/libvirt.conf
+COPY libvirtd.conf /etc/libvirt/libvirtd.conf
+COPY qemu.conf /etc/libvirt/qemu.conf
 
 CMD ["/root/start.sh"]

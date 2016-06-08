@@ -24,8 +24,12 @@ RUN yum -y install \
         make \
         && yum clean all 
 
-RUN groupadd --gid 9869 oneadmin
-RUN useradd --uid 9869 -g oneadmin -d /var/lib/one oneadmin
+# Same uid/gid as local user to mount host volumes with correct ownership
+RUN groupadd --gid 1000 oneadmin
+RUN useradd --uid 1000 -g oneadmin -d /var/lib/one oneadmin
+
+# Line below because otherwise one-server does not install (reason unknown)
+RUN rm -rf /var/lock
 
 COPY one-centos7.repo /etc/yum.repos.d/
 

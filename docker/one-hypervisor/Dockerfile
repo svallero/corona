@@ -1,4 +1,4 @@
-FROM fasrc/corona-base:4.12
+FROM svallero/corona-base:4.12
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="This is a OpenNebula node image for corona"
@@ -9,6 +9,7 @@ RUN yum -y install \
     openssh-server \
     && yum clean all
 
+COPY sshd.conf /etc/ssh/sshd_config
 COPY supervisord/one-hypervisor.conf /etc/supervisor.d/one-hypervisor.conf
 COPY start.sh /root/start.sh
 

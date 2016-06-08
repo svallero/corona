@@ -1,4 +1,4 @@
-FROM fasrc/corona-base:4.12
+FROM svallero/corona-base:4.12
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="This is a OpenNebula head node image for corona"
@@ -34,6 +34,7 @@ RUN rm /var/lib/one/.one/one_auth ;\
 
 VOLUME /var/lib/one
 
+COPY ssh_config /var/lib/one/.ssh/config
 COPY supervisord/one-controller.conf /etc/supervisor.d/one-controller.conf
 COPY start.sh /root/start.sh
 COPY one-auth.sh /tmp/one-auth.sh
